@@ -1,0 +1,73 @@
+{
+  "seed": 123,
+  "training": 0,
+  "device": "cuda",
+  "dataset":{
+    "name": "hde-405",
+    "path": "dataset/hde-405",
+    "batch_size": 128
+  },
+  "backbone": {
+    "name": "backbone",
+    "type": "resnet18",
+    "pretrained": "pre_trained/resnet18-5c106cde.pth"
+  },
+  "damagedOrNot": {
+    "name": "damaged",
+    "type": "Linear",
+    "in_channel": 512,
+    "out_channel": 2,
+    "dropout": 0.5,
+    "activation": "None"
+  },
+  "biTransfer": {
+    "name": "biTransfer",
+    "type": "Linear",
+    "in_channel": 512,
+    "out_channel": 405,
+    "dropout": 0.5,
+    "activation": "relu"
+  },
+  "gnn": {
+    "name": "grape",
+    "type": "EGSAGE_EGSAGE_EGSAGE",
+    "init_node": 405,
+    "init_edge": 1,
+    "hidden_node": 256,
+    "hidden_edge": 32,
+    "edge_mode": 1,
+    "norm_embs": "",
+    "concat_states": 0,
+    "node_post_mlp": "256",
+    "aggregation": "add",
+    "activation": "relu",
+    "dropout": 0.5,
+    "multi_channels": 0
+  },
+  "imputation": {
+    "hidden": "512_526",
+    "output": 1,
+    "activation": "relu",
+    "dropout": 0.5,
+    "output_activation": ""
+  },
+  "hyperparams": {
+    "epochs": 20000,
+    "loss_type": "mse_mse",
+    "visualization": 1,
+    "resume": {"gnn": "save_model_l1_No_acc/grape_1028.pth",
+               "imputation": "save_model_l1_No_acc/imputation_1028.pth",
+               "biTransfer": "save_model_l1_No_acc/biTransfer_1028.pth",
+               "backbone": "save_model_l1_No_acc/backbone_1028.pth",
+               "damaged": "save_model_l1_No_acc/damaged_1028.pth"}
+    },
+  "optim": {
+    "learning_rate": 0.001,
+    "type": "adam",
+    "scheduler": "",
+    "decay": 0.0,
+    "decay_step": 20,
+    "decay_rate": 0.9,
+    "momentum": 0.9
+  }
+}
