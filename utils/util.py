@@ -33,9 +33,9 @@ def get_activation(activation):
         raise NotImplementedError
 
 
-def get_args():
+def get_args(config_path):
     argparser = argparse.ArgumentParser()
-    argparser.add_argument("-c", "--config", default="config/easage.json", help="The Configuration File Path")
+    argparser.add_argument("-c", "--config", default=config_path, help="The Configuration File Path")
     args = argparser.parse_args()
     return args
 

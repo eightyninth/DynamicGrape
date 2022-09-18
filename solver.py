@@ -228,7 +228,7 @@ def test(dataset, dataset_loader, acc_fun=None):
 
 if __name__ == "__main__":
     # 加载参数
-    args = get_args()
+    args = get_args("config/easage.json")
     config = process_config(args)
     print(config)
 
